@@ -19,7 +19,11 @@
   <div style="margin-top: 40px;">
   <h1 style="text-align: center; color: #6A33D3; margin: 0; padding: 0;">SignUp</h1>
   <div style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 6px 6px 10px 0px #6A33D3; max-width: 500px ; margin: auto;" >
-  <form #userForm="ngForm">
+
+    <div class="alert alert-danger" *ngIf="errorMsg">
+{{errorMsg}}
+    </div>
+  <form #userForm="ngForm" novalidate *ngIf="!submitted"  (ngSubmit)="onsubmit()">
   <div class="form-group">
   <input class="form-control"  type="text" required #FirstName="ngModel" [class.is-invalid]="FirstName.invalid  && FirstName.touched" name="First Name"ngModel [(ngModel)]="userModel.FirstName">
 <small [class.d-none]="FirstName.valid || FirstName.untouched">Firstnamei s notrequired</small>
@@ -43,7 +47,8 @@
   <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="Gender" id="inlineRadio1" value="Male" ngModel>
   <label class="form-check-label" for="inlineRadio1">Male</label>
-  <input class="form-check-input" type="radio" name="Gender" id="inlineRadio1" value="Female" ngModel >
+
+  <input class="form-check-input" type="radio" name="Gender" id="inlineRadio2" value="Female" ngModel >
   <label class="form-check-label" for="inlineRadio1">Female</label>
   </div>
   <div class="form-group">
@@ -53,7 +58,7 @@
     </select>
   </div>
   <div class="form-group">
-  <button class="btn btn-success btn-lg" type="submit" name="submit">SignUp</button>
+  <button [disabled]="userForm.form.invalid" class="btn btn-success btn-lg" type="submit" name="submit" >SignUp</button>
   </div>
   </form>
   </div>
